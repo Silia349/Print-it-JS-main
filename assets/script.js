@@ -1,71 +1,80 @@
 const slides = [
 	{
-		"image": "slide1.jpg",
-		"tagLine": "Impressions tous formats <span>en boutique et en ligne</span>"
-	
+		image: "slide1.jpg",
+		tagLine: "Impressions tous formats <span>en boutique et en ligne</span>",
 	},
 	{
-		"image": "slide2.jpg",
-		"tagLine": "Tirages haute définition grand format <span>pour vos bureaux et events</span>"
-
+		image: "slide2.jpg",
+		tagLine: "Tirages haute définition grand format <span>pour vos bureaux et events</span>",
 	},
 	{
-		"image": "slide3.jpg",
-		"tagLine": "Grand choix de couleurs <span>de CMJN aux pantones</span>"
-	
+		image: "slide3.jpg",
+		tagLine: "Grand choix de couleurs <span>de CMJN aux pantones</span>",
 	},
 	{
-		"image": "slide4.png",
-		"tagLine": "Autocollants <span>avec découpe laser sur mesure</span>"
+		image: "slide4.png",
+		tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
+	},
+];
 
-	}
-]
+// Création des points (dots)
 
-//Affichage des points sur chacune des slides présentes dans le tableau
 const dots = slides.map(() => '<span class="dot"></span>').join("");
+
 document.querySelector(".dots").innerHTML = dots;
 
-//Création de la fonction de changement de Slide (détermine le changement d'image + du tag + du point). 
-let slideNumber = 0;
+// Elements du DOM
+
 const slideLength = slides.length;
 const image = document.querySelector(".banner-img");
 const tagLine = document.querySelector(".tagline");
-const LigneDots = document.querySelectorAll(".dot");
+const slideDots = document.querySelectorAll(".dot");
+const leftArrow = document.querySelector(".arrow_left");
+const rightArrow = document.querySelector(".arrow_right");
 
-function ChangeSlide() {
-	image.src = "./assets/images/slideshow/" + slides[slideNumber].image;
-	tagLine.innerHTML = slides[slideNumber].tagLine;
-	LigneDots.forEach(dot => dot.classList.remove("dot_selected"));
-	LigneDots[slideNumber].classList.add("dot_selected");
+// Variable - Index slide
 
-};
+let currentSlideIndex = 0;
 
-//Appel de la fonction
-ChangeSlide();
+// Fonction changement de Slide
 
-//Ajout de la fonction changement de slide au clique de la flèche gauche
-let flechegauche = document.querySelector(".arrow_left");
+function changeSlide() {
+	image.src = "./assets/images/slideshow/" + slides[currentSlideIndex].image;
+	tagLine.innerHTML = slides[currentSlideIndex].tagLine;
+	slideDots.forEach(dot => dot.classList.remove("dot_selected"));
+	slideDots[currentSlideIndex].classList.add("dot_selected");
+}
 
-flechegauche.addEventListener("click", function () {
-	slideNumber--;
+// Appel de la fonction changement de Slide
 
-	if (slideNumber < 0) {
-		slideNumber = slideLength - 1;
+changeSlide();
+
+// Fonction Navigation flèche gauche
+
+leftArrow.addEventListener("click", () => {
+	currentSlideIndex--;
+	if (currentSlideIndex < 0) {
+		currentSlideIndex = slideLength - 1;
 	}
-
-	ChangeSlide();
+	changeSlide();
 });
 
-//Ajout de la fonction changement de slide au clique de la flèche droite
-let flechedroite = document.querySelector(".arrow_right");
+// Fonction Navigation flèche droite
 
-flechedroite.addEventListener("click", function () {
-	slideNumber++;
-
-	if (slideNumber >= slideLength) {
-		slideNumber = 0;
+rightArrow.addEventListener("click", () => {
+	currentSlideIndex++;
+	if (currentSlideIndex >= slideLength) {
+		currentSlideIndex = 0;
 	}
+	changeSlide();
+});
 
-	ChangeSlide();
+// Fonction Navigation Dots
+
+slideDots.forEach((dot, index) => {
+	dot.addEventListener("click", () => {
+		currentSlideIndex = index;
+		changeSlide();
+	});
 });
 

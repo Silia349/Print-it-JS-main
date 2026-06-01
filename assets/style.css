@@ -7,8 +7,6 @@
 
 /* Reset CSS */
 * {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 html, body, div, span, applet, object, iframe,
@@ -52,9 +50,6 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-}
-body {
-
 }
 section {
 	margin-block: 6em;
@@ -121,18 +116,23 @@ header {
 	object-fit: cover;
 	object-position: center;
 }
-/* Code CSS en prévision de l'ajout d'un carousel pour la bannière */
-/* Gestion des fleches du carrousel */
+/* Gestion des flèches du carrousel */
+.arrow {
+	background: none;
+	border: none;
+	padding: 0;
+}
+
 #banner .arrow {
 	position: absolute;
 	cursor: pointer;
 }
+
 #banner .arrow_left {
 	left: 30px;
 }
 
 #banner .arrow_left:hover {
-	left: 30px;
 	transform: scale(1.1);
 	opacity: 1;
 }
@@ -142,7 +142,6 @@ header {
 }
 
 #banner .arrow_right:hover {
-	right: 30px;
 	transform: scale(1.1);
 	opacity: 1;
 }
@@ -153,19 +152,25 @@ header {
 	bottom: 40px;
 	display: flex;
 }
+
 .dot {
 	margin-inline: 5px;
 	width: 13px;
 	height: 13px;
 	background-color: #ffffff00;
 	border: 3px solid #fff;
-	border-radius: 100%;
-	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);;
+	border-radius: 50%;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+	cursor: pointer;
 }
+
 .dot_selected {
 	background-color: #fff;
 }
-/* Fin du code CSS pour le carousel */
+
+.dot:hover {
+	background-color: rgb(101, 3, 88);
+}
 #banner p {
 	font-family: 'Roboto Slab', sans-serif;
 	font-weight: 900;
@@ -183,8 +188,8 @@ header {
 #about-us {
 	display: flex;
 }
-#about-us article, #about-us aside {
-	flex:1;
+#about-us div, #about-us aside {
+	flex: 1;
 }
 #about-us li {
 	background: url("./images/tricolor-icon.png") no-repeat left top;
